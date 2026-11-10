@@ -1,0 +1,8 @@
+Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)
+
+Por la presente, el autor otorga permiso para ver, descargar, modificar y distribuir el código fuente de este proyecto bajo las siguientes condiciones obligatorias:
+
+1. ATRIBUCIÓN (Créditos): Se debe dar crédito de manera adecuada al autor original (LostieBulter), proporcionar un enlace a este repositorio original e indicar si se realizaron cambios.
+2. NO COMERCIAL: Este proyecto, su código fuente y cualquier obra derivada NO pueden ser utilizados con fines comerciales, obtención de lucro o beneficio económico directo o indirecto.
+
+Cualquier uso que no cumpla con estas condiciones anula automáticamente los permisos otorgados por esta licencia.
