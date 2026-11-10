@@ -1,3 +1,5 @@
+Copyright (c) 2026 LostieBulter
+
 Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)
 
 Por la presente, el autor otorga permiso para ver, descargar, modificar y distribuir el código fuente de este proyecto bajo las siguientes condiciones obligatorias:
