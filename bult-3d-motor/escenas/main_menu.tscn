@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://dmuifg7xh2t4l"]
+
+[ext_resource type="Script" uid="uid://dt7fd110tmxld" path="res://main_menu.gd" id="1_ter2f"]
+
+[node name="MainMenu" type="Control" unique_id=1211218385]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ter2f")
+
+[node name="Background" type="ColorRect" parent="." unique_id=686936821]
+layout_mode = 0
+offset_right = 1150.0
+offset_bottom = 647.0
+color = Color(0.7073339, 0.55916184, 0.6845759, 1)
+
+[node name="TabBar" type="HBoxContainer" parent="." unique_id=670864839]
+layout_mode = 0
+offset_left = 118.999985
+offset_top = 54.000004
+offset_right = 301.0
+offset_bottom = 92.97058
+scale = Vector2(1.36, 1.36)
+
+[node name="InfoTabButton" type="Button" parent="TabBar" unique_id=1834173342]
+layout_mode = 2
+text = "    Info     "
+
+[node name="ProjectsTabButton" type="Button" parent="TabBar" unique_id=1665041663]
+layout_mode = 2
+text = "  Proyectos  "
+
+[node name="InfoPanel" type="Panel" parent="." unique_id=1519515040]
+layout_mode = 0
+offset_top = 121.0
+offset_right = 534.0
+offset_bottom = 648.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="InfoPanel" unique_id=1138480139]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 3.0
+offset_right = 532.0
+offset_bottom = 525.0
+
+[node name="ShortcutsLabel" type="Label" parent="InfoPanel/ScrollContainer" unique_id=189753469]
+custom_minimum_size = Vector2(524.7, 522.595)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+autowrap_mode = 2
+
+[node name="ProjectsPanel" type="Panel" parent="." unique_id=1719935066]
+visible = false
+layout_mode = 0
+offset_left = -1.0
+offset_top = 122.0
+offset_right = 530.0
+offset_bottom = 647.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ProjectsPanel" unique_id=41639034]
+layout_mode = 0
+offset_right = 534.0
+offset_bottom = 524.0
+
+[node name="ProjectsList" type="VBoxContainer" parent="ProjectsPanel/ScrollContainer" unique_id=1701305453]
+layout_mode = 2
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1288055961]
+position = Vector2(571, 331)
+
+[node name="EngineTitleLabel" type="Label" parent="." unique_id=1617212870]
+layout_mode = 0
+offset_left = 699.0
+offset_top = 237.0
+offset_right = 1010.0
+offset_bottom = 408.0
+theme_override_colors/font_color = Color(0.42784163, 0.24360123, 0.66646826, 1)
+theme_override_font_sizes/font_size = 40
+text = "  Bult 3D Motor  
+          
+          nv1.3"
+
+[node name="ExitButton" type="Button" parent="." unique_id=1791039343]
+layout_mode = 0
+offset_left = 908.0
+offset_top = 53.0
+offset_right = 1030.0
+offset_bottom = 84.0
+scale = Vector2(1.56, 1.56)
+text = "Salir del motor"

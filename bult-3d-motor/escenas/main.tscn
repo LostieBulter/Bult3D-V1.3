@@ -1,0 +1,899 @@
+[gd_scene format=3 uid="uid://cr6gvggdungs1"]
+
+[ext_resource type="Script" uid="uid://ut6xjp54wgt7" path="res://main.gd" id="1_d7u15"]
+[ext_resource type="Shader" uid="uid://dliac050dojsg" path="res://escenas/grid.gdshader" id="2_0kxa1"]
+[ext_resource type="Script" uid="uid://dsk4rgmyi5d7t" path="res://escenas/camera_rig.gd" id="2_jumxm"]
+[ext_resource type="Script" uid="uid://b7vf7q5mgcli8" path="res://escenas/nav_gizmo.gd" id="4_26pgj"]
+[ext_resource type="Script" uid="uid://lqfbx2skmh1d" path="res://escenas/mode_bar.gd" id="4_woaio"]
+[ext_resource type="Script" uid="uid://bxgjyqop2o2ro" path="res://escenas/tool_selector.gd" id="5_dkga6"]
+[ext_resource type="Script" uid="uid://cgcifrj1mcijw" path="res://escenas/selection_manager.gd" id="6_a8p2b"]
+[ext_resource type="Script" uid="uid://ckm7b02a7p73v" path="res://escenas/object_toolbar.gd" id="6_o8odp"]
+[ext_resource type="Script" uid="uid://dvy015gcci71g" path="res://escenas/outliner.gd" id="7_68mvh"]
+[ext_resource type="Script" uid="uid://dd7dsc3y57or3" path="res://escenas/light_properties_panel.gd" id="8_dg7ii"]
+[ext_resource type="Script" uid="uid://cgfxsempu6gm8" path="res://escenas/history_manager.gd" id="9_lyxkq"]
+[ext_resource type="Script" uid="uid://11duo45r2b3g" path="res://escenas/timeline_ruler.gd" id="10_7an46"]
+[ext_resource type="Script" uid="uid://2wkgdv7goxgs" path="res://escenas/add_keyframe_button.gd" id="10_acisx"]
+[ext_resource type="Script" uid="uid://bdggnkr3lh6rb" path="res://escenas/end_frame_input.gd" id="11_s4hgp"]
+[ext_resource type="Script" uid="uid://d1eprwjm1kff6" path="res://escenas/playback_controls.gd" id="12_ueiap"]
+[ext_resource type="Script" uid="uid://blpbp4d2d8gi7" path="res://escenas/play_button.gd" id="13_ymkly"]
+[ext_resource type="Script" uid="uid://b3ijtjdlq8by6" path="res://escenas/animation_manager.gd" id="14_a5wrc"]
+[ext_resource type="Script" uid="uid://6xylbpgpx61" path="res://escenas/stop_button.gd" id="14_jwie6"]
+[ext_resource type="Script" uid="uid://egb2mush6hvc" path="res://escenas/video_loop_controls.gd" id="16_1equp"]
+[ext_resource type="Script" uid="uid://bnr4s2tog6q1l" path="res://escenas/options_panel.gd" id="16_r01y2"]
+[ext_resource type="Script" uid="uid://dgd5gm7dtbgfo" path="res://escenas/materials_panel.gd" id="17_88j14"]
+[ext_resource type="Script" uid="uid://b3qqb65seodfa" path="res://escenas/material_context_menu.gd" id="18_f1j2c"]
+[ext_resource type="Script" uid="uid://kjxtvywfq3qc" path="res://escenas/music_properties_panel.gd" id="19_3c8yq"]
+[ext_resource type="Script" uid="uid://dmppiaia8jsgh" path="res://escenas/video_properties_panel.gd" id="20_hrygr"]
+[ext_resource type="Script" uid="uid://0p65a3odkm6o" path="res://escenas/render_manager.gd" id="20_rd5dn"]
+[ext_resource type="Script" uid="uid://bghqn3v2ojg0a" path="res://escenas/toast_label.gd" id="22_jq2gp"]
+[ext_resource type="Script" uid="uid://cjxr4r06l5jqe" path="res://escenas/bone_axis_ring.gd" id="23_yqr1d"]
+[ext_resource type="Script" uid="uid://csm4t2dsfbw1d" path="res://escenas/camera_properties_panel.gd" id="24_ltvhs"]
+[ext_resource type="Script" uid="uid://dmsm6ma0vslqt" path="res://escenas/video_player_manager.gd" id="25_8qufa"]
+[ext_resource type="Script" uid="uid://e0lhutuace57" path="res://escenas/texture_library_panel.gd" id="25_v4ejg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d7u15"]
+render_priority = 0
+shader = ExtResource("2_0kxa1")
+shader_parameter/grid_size = 1.0
+shader_parameter/line_thickness = 0.02
+shader_parameter/line_color = Color(1, 1, 1, 0.6)
+shader_parameter/base_color = Color(0.1, 0.1, 0.12, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_d7u15"]
+material = SubResource("ShaderMaterial_d7u15")
+size = Vector2(50, 50)
+
+[sub_resource type="Environment" id="Environment_sctf7"]
+background_mode = 2
+ambient_light_color = Color(0.3403393, 0.34033933, 0.3403393, 1)
+
+[node name="Main" type="Node3D" unique_id=918351754]
+script = ExtResource("1_d7u15")
+selection_manager_path = NodePath("SelectionManager")
+history_manager_path = NodePath("HistoryManager")
+options_panel_path = NodePath("CanvasLayer/OptionsPanel")
+
+[node name="CameraRig" type="Node3D" parent="." unique_id=304445274]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("2_jumxm")
+nav_gizmo_path = NodePath("../CanvasLayer/NavGizmo")
+tool_selector_path = NodePath("../CanvasLayer/ToolSelector")
+selection_manager_path = NodePath("../SelectionManager")
+object_toolbar_path = NodePath("../CanvasLayer/ObjectToolbar")
+history_manager_path = NodePath("../HistoryManager")
+timeline_ruler_path = NodePath("../CanvasLayer/AnimationPanel/TimelineRuler")
+
+[node name="CameraPitch" type="Node3D" parent="CameraRig" unique_id=1439125722]
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig/CameraPitch" unique_id=1877282062]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1716227200 groups=["luces_estudio"]]
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." unique_id=2128666083 groups=["luces_estudio"]]
+transform = Transform3D(-0.99999547, 0, -0.0030394495, 0, 1, 0, 0.0030394495, 0, -0.99999547, 0, 0, 0)
+
+[node name="DirectionalLight3D5" type="DirectionalLight3D" parent="." unique_id=1100285701 groups=["luces_estudio"]]
+transform = Transform3D(-0.006957315, 0, 0.99997586, 0, 1, 0, -0.99997586, 0, -0.006957315, 0, 0, 0)
+
+[node name="DirectionalLight3D6" type="DirectionalLight3D" parent="." unique_id=1085191499 groups=["luces_estudio"]]
+transform = Transform3D(0.007850733, 0, -0.99996924, 0, 1, 0, 0.99996924, 0, 0.007850733, 0, 0, 0)
+
+[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="." unique_id=932269634 groups=["luces_estudio"]]
+transform = Transform3D(-0.99999547, 0, -0.0030394495, -0.0030394087, -0.005184194, 0.99998206, -1.5757096e-05, 0.9999866, 0.005184171, 0, 0, 0)
+
+[node name="DirectionalLight3D4" type="DirectionalLight3D" parent="." unique_id=1317492920 groups=["luces_estudio"]]
+transform = Transform3D(-0.99999547, 6.1192555e-13, -0.0030394492, 0.003039437, 0.0026957518, -0.9999917, 8.193594e-06, -0.99999636, -0.0026957388, 0, 0, 0)
+
+[node name="SpawnRoot" type="Node3D" parent="." unique_id=1425519908]
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=212042681]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0026721656, 0)
+mesh = SubResource("PlaneMesh_d7u15")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1398928520]
+
+[node name="ModeBar" type="HBoxContainer" parent="CanvasLayer" unique_id=718108175]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -241.54999
+offset_right = 122.45026
+offset_bottom = 40.0
+grow_horizontal = 2
+scale = Vector2(1.425, 1.425)
+script = ExtResource("4_woaio")
+animation_panel_path = NodePath("../AnimationPanel")
+options_panel_path = NodePath("../OptionsPanel")
+materials_panel_path = NodePath("../MaterialsPanel")
+
+[node name="EditButton" type="Button" parent="CanvasLayer/ModeBar" unique_id=1826137007]
+layout_mode = 2
+text = "  Edición   "
+
+[node name="AnimButton" type="Button" parent="CanvasLayer/ModeBar" unique_id=2046723296]
+layout_mode = 2
+text = " Animación "
+
+[node name="OptionsButton" type="Button" parent="CanvasLayer/ModeBar" unique_id=722710825]
+layout_mode = 2
+text = "  Opciones  "
+
+[node name="MaterialsButton" type="Button" parent="CanvasLayer/ModeBar" unique_id=552148466]
+layout_mode = 2
+text = "  Editar  "
+
+[node name="AddMenu" type="PopupMenu" parent="CanvasLayer" unique_id=1663065891]
+oversampling_override = 1.0
+visible = true
+item_count = 1
+item_0/id = 0
+
+[node name="LightsMenu" type="PopupMenu" parent="CanvasLayer/AddMenu" unique_id=2001990480]
+
+[node name="CamerasMenu" type="PopupMenu" parent="CanvasLayer/AddMenu" unique_id=1747787904]
+oversampling_override = 1.0
+
+[node name="MusicMenu" type="PopupMenu" parent="CanvasLayer/AddMenu" unique_id=1717567978]
+
+[node name="VideoMenu" type="PopupMenu" parent="CanvasLayer/AddMenu" unique_id=715815252]
+
+[node name="NavGizmo" type="Control" parent="CanvasLayer" unique_id=1516163103]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -123.0
+offset_top = 73.0
+offset_right = -82.239746
+offset_bottom = 113.0
+grow_horizontal = 0
+scale = Vector2(1.05, 1.05)
+script = ExtResource("4_26pgj")
+camera_rig_path = NodePath("../../CameraRig")
+
+[node name="ToolSelector" type="Control" parent="CanvasLayer" unique_id=648213473]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 889.0
+offset_top = 217.0
+offset_right = 983.7998
+offset_bottom = 306.09
+script = ExtResource("5_dkga6")
+
+[node name="ObjectToolbar" type="Control" parent="CanvasLayer" unique_id=1228152783]
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -74.380005
+offset_right = 95.95376
+offset_bottom = 163.05356
+grow_vertical = 2
+scale = Vector2(0.865, 0.865)
+script = ExtResource("6_o8odp")
+
+[node name="DeleteMenu" type="PopupMenu" parent="CanvasLayer" unique_id=223066980]
+
+[node name="Outliner" type="Panel" parent="CanvasLayer" unique_id=237557886]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -166.0
+offset_top = -115.99991
+offset_bottom = 115.99991
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("7_68mvh")
+spawn_root_path = NodePath("../../SpawnRoot")
+selection_manager_path = NodePath("../../SelectionManager")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Outliner" unique_id=780672739]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.335
+offset_right = 164.0
+offset_bottom = 228.665
+
+[node name="ItemsList" type="VBoxContainer" parent="CanvasLayer/Outliner/ScrollContainer" unique_id=1078357088]
+layout_mode = 2
+
+[node name="NewFolderButton" type="Button" parent="CanvasLayer/Outliner" unique_id=1630917585]
+layout_mode = 0
+offset_left = 96.0
+offset_top = -33.039993
+offset_right = 166.0
+offset_bottom = -2.0399933
+text = "Carpeta"
+
+[node name="FolderMenu" type="PopupMenu" parent="CanvasLayer/Outliner" unique_id=1292926330]
+
+[node name="FolderActionMenu" type="PopupMenu" parent="CanvasLayer/Outliner" unique_id=1265142223]
+
+[node name="LightPropertiesPanel" type="Panel" parent="CanvasLayer" unique_id=489326440]
+offset_left = 582.0
+offset_top = 237.0
+offset_right = 740.0
+offset_bottom = 451.0
+script = ExtResource("8_dg7ii")
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/LightPropertiesPanel" unique_id=1548507702]
+layout_mode = 0
+offset_left = 126.0
+offset_top = -31.0
+offset_right = 156.0
+text = "X"
+
+[node name="IntensityLabel" type="Label" parent="CanvasLayer/LightPropertiesPanel" unique_id=2116008685]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 9.0
+offset_right = 106.0
+offset_bottom = 35.0
+theme_override_font_sizes/font_size = 12
+text = "Intensidad"
+
+[node name="IntensitySlider" type="HSlider" parent="CanvasLayer/LightPropertiesPanel" unique_id=1695907868]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 28.0
+offset_right = 116.0
+offset_bottom = 69.0
+max_value = 5.0
+
+[node name="ShadowCheckbox" type="CheckBox" parent="CanvasLayer/LightPropertiesPanel" unique_id=44268043]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 72.0
+offset_right = 102.0
+offset_bottom = 107.0
+theme_override_font_sizes/font_size = 15
+text = "   Sombra"
+
+[node name="DeleteLightButton" type="Button" parent="CanvasLayer/LightPropertiesPanel" unique_id=784549319]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -31.0
+offset_right = 58.0
+text = "Borrar"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="CanvasLayer/LightPropertiesPanel" unique_id=1242062229]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 116.0
+offset_right = 46.0
+offset_bottom = 156.0
+
+[node name="RangeLabel" type="Label" parent="CanvasLayer/LightPropertiesPanel" unique_id=630345936]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 111.0
+offset_right = 124.0
+offset_bottom = 134.0
+text = "Rango"
+
+[node name="RangeSpinBox" type="SpinBox" parent="CanvasLayer/LightPropertiesPanel" unique_id=265418452]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 144.0
+offset_right = 152.5
+offset_bottom = 175.0
+min_value = 0.1
+step = 0.1
+value = 0.1
+
+[node name="AnimationPanel" type="Panel" parent="CanvasLayer" unique_id=9621595]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -575.0
+offset_top = -130.99963
+offset_right = 575.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="TrackHeaderRow" type="Panel" parent="CanvasLayer/AnimationPanel" unique_id=1455191262]
+layout_mode = 0
+offset_top = -47.0
+offset_right = 1150.0
+offset_bottom = 4.0
+
+[node name="AddKeyframeButton" type="Control" parent="CanvasLayer/AnimationPanel/TrackHeaderRow" unique_id=1995049927]
+anchors_preset = 0
+offset_left = 44.0
+offset_top = 1.0
+offset_right = 89.0
+offset_bottom = 47.0
+script = ExtResource("10_acisx")
+
+[node name="EndFrameInput" type="LineEdit" parent="CanvasLayer/AnimationPanel/TrackHeaderRow" unique_id=402242786]
+layout_mode = 0
+offset_left = 1003.0
+offset_top = 1.0
+offset_right = 1094.5
+offset_bottom = 47.0
+script = ExtResource("11_s4hgp")
+
+[node name="TimelineRuler" type="Control" parent="CanvasLayer/AnimationPanel" unique_id=1454830420]
+anchors_preset = 0
+offset_right = 1154.0
+offset_bottom = 135.0
+script = ExtResource("10_7an46")
+
+[node name="PlaybackControls" type="HBoxContainer" parent="CanvasLayer/AnimationPanel" unique_id=1719020361]
+layout_mode = 0
+offset_left = 505.6
+offset_top = -40.785
+offset_right = 539.6001
+offset_bottom = -0.78499985
+script = ExtResource("12_ueiap")
+
+[node name="PlayButton" type="Control" parent="CanvasLayer/AnimationPanel/PlaybackControls" unique_id=545963386]
+layout_mode = 2
+script = ExtResource("13_ymkly")
+
+[node name="StopButton" type="Control" parent="CanvasLayer/AnimationPanel/PlaybackControls" unique_id=2015986209]
+layout_mode = 2
+script = ExtResource("14_jwie6")
+
+[node name="VideoLoopControls" type="HBoxContainer" parent="CanvasLayer/AnimationPanel" unique_id=1324858676]
+layout_mode = 0
+offset_left = 857.0
+offset_top = -38.0
+offset_right = 963.0
+offset_bottom = -7.0
+script = ExtResource("16_1equp")
+
+[node name="PlayOnceButton" type="Button" parent="CanvasLayer/AnimationPanel/VideoLoopControls" unique_id=649057373]
+layout_mode = 2
+text = "  ▶  "
+
+[node name="LoopButton" type="Button" parent="CanvasLayer/AnimationPanel/VideoLoopControls" unique_id=929252374]
+layout_mode = 2
+text = "  🔁  "
+
+[node name="OptionsPanel" type="Panel" parent="CanvasLayer" unique_id=492856494]
+visible = false
+offset_left = 312.0
+offset_top = 80.0
+offset_right = 841.0
+offset_bottom = 638.0
+script = ExtResource("16_r01y2")
+directional_light_path = NodePath("../../DirectionalLight3D")
+render_manager_path = NodePath("../../RenderManager")
+main_script_path = NodePath("../..")
+animation_manager_path = NodePath("../../AnimationManager")
+
+[node name="CategoryTabs" type="HBoxContainer" parent="CanvasLayer/OptionsPanel" unique_id=2018415484]
+layout_mode = 0
+offset_left = 0.89
+offset_top = 1.985
+offset_right = 44.890015
+offset_bottom = 41.985
+
+[node name="LightingTabButton" type="Button" parent="CanvasLayer/OptionsPanel/CategoryTabs" unique_id=1140141351]
+layout_mode = 2
+text = "Iluminación"
+
+[node name="ImportTabButton" type="Button" parent="CanvasLayer/OptionsPanel/CategoryTabs" unique_id=13078359]
+layout_mode = 2
+text = "Importar"
+
+[node name="ExportTabButton" type="Button" parent="CanvasLayer/OptionsPanel/CategoryTabs" unique_id=492915444]
+layout_mode = 2
+text = "Exportar"
+
+[node name="RenderTabButton" type="Button" parent="CanvasLayer/OptionsPanel/CategoryTabs" unique_id=1653561251]
+layout_mode = 2
+text = "Video-Foto"
+
+[node name="LightingSection" type="VBoxContainer" parent="CanvasLayer/OptionsPanel" unique_id=1216856763]
+layout_mode = 0
+offset_left = 5.86
+offset_top = 104.77
+offset_right = 75.000015
+offset_bottom = 194.77002
+
+[node name="AmbientLabel" type="Label" parent="CanvasLayer/OptionsPanel/LightingSection" unique_id=1725989524]
+layout_mode = 2
+text = "Somras"
+
+[node name="AmbientSlider" type="HSlider" parent="CanvasLayer/OptionsPanel/LightingSection" unique_id=1267354100]
+layout_mode = 2
+
+[node name="SunEnergyLabel" type="Label" parent="CanvasLayer/OptionsPanel/LightingSection" unique_id=309211302]
+layout_mode = 2
+text = "Intencidad"
+
+[node name="SunEnergySlider" type="HSlider" parent="CanvasLayer/OptionsPanel/LightingSection" unique_id=415906664]
+layout_mode = 2
+
+[node name="MasterBrightnessLabel" type="Label" parent="CanvasLayer/OptionsPanel/LightingSection" unique_id=295937872]
+layout_mode = 2
+text = "Brillo general"
+
+[node name="MasterBrightnessSpinBox" type="SpinBox" parent="CanvasLayer/OptionsPanel/LightingSection" unique_id=1583853886]
+layout_mode = 2
+min_value = -5.0
+max_value = 5.0
+step = 0.1
+
+[node name="ImportSection" type="Label" parent="CanvasLayer/OptionsPanel" unique_id=1442976132]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 483.0
+offset_right = 142.0
+offset_bottom = 506.0
+text = "Próximamente"
+
+[node name="ExportSection" type="Label" parent="CanvasLayer/OptionsPanel" unique_id=195173475]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 519.0
+offset_right = 142.0
+offset_bottom = 542.0
+text = "Próximamente"
+
+[node name="RenderSection" type="VBoxContainer" parent="CanvasLayer/OptionsPanel" unique_id=143627937]
+layout_mode = 0
+offset_left = 260.0
+offset_top = 46.0
+offset_right = 383.0
+offset_bottom = 182.0
+
+[node name="VideoStartFrameInput" type="LineEdit" parent="CanvasLayer/OptionsPanel/RenderSection" unique_id=542074699]
+layout_mode = 2
+
+[node name="VideoEndFrameInput" type="LineEdit" parent="CanvasLayer/OptionsPanel/RenderSection" unique_id=1128929545]
+layout_mode = 2
+
+[node name="ExportVideoButton" type="Button" parent="CanvasLayer/OptionsPanel/RenderSection" unique_id=1591585948]
+layout_mode = 2
+text = " Exportar Frames "
+
+[node name="ExportPhotoButton" type="Button" parent="CanvasLayer/OptionsPanel/RenderSection" unique_id=1599850722]
+layout_mode = 2
+text = "Exportar Foto"
+
+[node name="ExportMp4Button" type="Button" parent="CanvasLayer/OptionsPanel/RenderSection" unique_id=260732473]
+layout_mode = 2
+text = "  Exportar Video (.mp4)  "
+
+[node name="ExportProgressBar" type="ProgressBar" parent="CanvasLayer/OptionsPanel/RenderSection" unique_id=161868548]
+visible = false
+layout_mode = 2
+
+[node name="ResolutionLabel" type="Label" parent="CanvasLayer/OptionsPanel/RenderSection" unique_id=65993662]
+layout_mode = 2
+text = "            Resolución"
+
+[node name="ResolutionOption" type="OptionButton" parent="CanvasLayer/OptionsPanel/RenderSection" unique_id=1251804716]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/OptionsPanel" unique_id=589454470]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 273.0
+offset_right = 136.0
+offset_bottom = 306.0
+text = "FPS del proyecto"
+
+[node name="FpsSpinBox" type="SpinBox" parent="CanvasLayer/OptionsPanel" unique_id=1352250886]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 306.0
+offset_right = 99.5
+offset_bottom = 337.0
+min_value = 1.0
+max_value = 240.0
+value = 1.0
+
+[node name="InterpolationOption" type="OptionButton" parent="CanvasLayer/OptionsPanel" unique_id=205470345]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 363.0
+offset_right = 97.0
+offset_bottom = 419.0
+
+[node name="ViewCameraMenu" type="PopupMenu" parent="CanvasLayer" unique_id=1433686393]
+oversampling_override = 1.0
+visible = true
+
+[node name="MaterialsPanel" type="Panel" parent="CanvasLayer" unique_id=366195971]
+visible = false
+offset_left = 3.0
+offset_top = 515.0
+offset_right = 1155.0
+offset_bottom = 651.0
+script = ExtResource("17_88j14")
+context_menu_path = NodePath("../MaterialContextMenu")
+texture_library_panel_path = NodePath("../TextureLibraryPanel")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/MaterialsPanel" unique_id=850466381]
+layout_mode = 0
+offset_top = 2.0
+offset_right = 1148.0
+offset_bottom = 133.0
+
+[node name="MaterialsList" type="HBoxContainer" parent="CanvasLayer/MaterialsPanel/ScrollContainer" unique_id=564357646]
+custom_minimum_size = Vector2(1152, 33.775)
+layout_mode = 2
+
+[node name="MaterialContextMenu" type="Panel" parent="CanvasLayer" unique_id=1457522929]
+visible = false
+offset_left = 193.0
+offset_top = 167.0
+offset_right = 691.0
+offset_bottom = 493.0
+script = ExtResource("18_f1j2c")
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="CanvasLayer/MaterialContextMenu" unique_id=2007074453]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 201.0
+offset_bottom = 148.0
+
+[node name="ImportTextureButton" type="Button" parent="CanvasLayer/MaterialContextMenu" unique_id=771975087]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 273.0
+offset_right = 188.0
+offset_bottom = 307.0
+text = "Importar Textura"
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/MaterialContextMenu" unique_id=337230219]
+layout_mode = 0
+offset_left = 467.0
+offset_top = -33.0
+offset_right = 495.0
+offset_bottom = -2.0
+text = "X"
+
+[node name="ResetButton" type="Button" parent="CanvasLayer/MaterialContextMenu" unique_id=1613111495]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 225.0
+offset_right = 176.0
+offset_bottom = 256.0
+text = "  Reiniciar  "
+
+[node name="DeleteMaterialButton" type="Button" parent="CanvasLayer/MaterialContextMenu" unique_id=1048311930]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 169.0
+offset_right = 188.0
+offset_bottom = 200.0
+text = "  Borrar Material  "
+
+[node name="RoughnessLabel" type="Label" parent="CanvasLayer/MaterialContextMenu" unique_id=1424002716]
+layout_mode = 0
+offset_left = 225.0
+offset_top = 8.0
+offset_right = 318.0
+offset_bottom = 31.0
+text = "  Rugosidad "
+
+[node name="RoughnessSlider" type="HSlider" parent="CanvasLayer/MaterialContextMenu" unique_id=1608360087]
+layout_mode = 0
+offset_left = 232.0
+offset_top = 36.0
+offset_right = 317.0
+offset_bottom = 66.0
+max_value = 1.0
+step = 0.05
+
+[node name="MetallicLabel" type="Label" parent="CanvasLayer/MaterialContextMenu" unique_id=547418573]
+layout_mode = 0
+offset_left = 372.0
+offset_top = 8.0
+offset_right = 452.0
+offset_bottom = 31.0
+text = "    Metal  "
+
+[node name="MetallicSlider" type="HSlider" parent="CanvasLayer/MaterialContextMenu" unique_id=777016996]
+layout_mode = 0
+offset_left = 369.0
+offset_top = 40.0
+offset_right = 462.0
+offset_bottom = 61.0
+
+[node name="MusicPropertiesPanel" type="Panel" parent="CanvasLayer" unique_id=1919122512]
+visible = false
+offset_left = 455.0
+offset_top = 339.0
+offset_right = 664.0
+offset_bottom = 393.0
+script = ExtResource("19_3c8yq")
+animation_manager_path = NodePath("../../AnimationManager")
+
+[node name="VolumeLabel" type="Label" parent="CanvasLayer/MusicPropertiesPanel" unique_id=172357925]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 78.0
+offset_bottom = 52.0
+text = "Volumen"
+
+[node name="VolumeSlider" type="HSlider" parent="CanvasLayer/MusicPropertiesPanel" unique_id=1458755493]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 23.0
+offset_right = 76.0
+offset_bottom = 55.0
+
+[node name="ImportAudioButton" type="Button" parent="CanvasLayer/MusicPropertiesPanel" unique_id=884400717]
+layout_mode = 0
+offset_left = 110.0
+offset_top = 11.0
+offset_right = 188.0
+offset_bottom = 42.0
+text = "Importar"
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/MusicPropertiesPanel" unique_id=1828662953]
+layout_mode = 0
+offset_left = 186.0
+offset_top = -31.0
+offset_right = 208.0
+text = "X"
+
+[node name="VideoPropertiesPanel" type="Panel" parent="CanvasLayer" unique_id=1604695370]
+visible = false
+offset_left = 508.0
+offset_top = 296.0
+offset_right = 719.0
+offset_bottom = 522.0
+script = ExtResource("20_hrygr")
+selection_manager_path = NodePath("../../SelectionManager")
+main_script_path = NodePath("../..")
+animation_manager_path = NodePath("../../AnimationManager")
+
+[node name="ImportVideoButton" type="Button" parent="CanvasLayer/VideoPropertiesPanel" unique_id=461463708]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 23.0
+offset_right = 185.0
+offset_bottom = 54.0
+text = " Importar Video "
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/VideoPropertiesPanel" unique_id=1662338200]
+layout_mode = 0
+offset_left = 192.0
+offset_top = -31.0
+offset_right = 210.0
+text = "X"
+
+[node name="VolumeLabel" type="Label" parent="CanvasLayer/VideoPropertiesPanel" unique_id=577114617]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 76.0
+offset_right = 138.0
+offset_bottom = 99.0
+text = "Volumen"
+
+[node name="VolumeSlider" type="HSlider" parent="CanvasLayer/VideoPropertiesPanel" unique_id=382681819]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 107.0
+offset_right = 162.0
+offset_bottom = 123.0
+
+[node name="BrightnessSpinBox" type="SpinBox" parent="CanvasLayer/VideoPropertiesPanel" unique_id=1053174282]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 176.0
+offset_right = 158.5
+offset_bottom = 207.0
+min_value = 0.1
+max_value = 5.0
+step = 0.1
+value = 1.0
+
+[node name="Label" type="Label" parent="CanvasLayer/VideoPropertiesPanel" unique_id=631394480]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 139.0
+offset_right = 126.0
+offset_bottom = 162.0
+text = "Brillo"
+
+[node name="DeleteVideoButton" type="Button" parent="CanvasLayer/VideoPropertiesPanel" unique_id=1840756702]
+layout_mode = 0
+offset_top = -31.0
+offset_right = 72.0
+text = "Eliminar"
+
+[node name="ToastLabel" type="Label" parent="CanvasLayer" unique_id=2026639974]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("22_jq2gp")
+
+[node name="BoneAxisPanel" type="Panel" parent="CanvasLayer" unique_id=1463099000]
+visible = false
+offset_left = 790.0
+offset_top = 203.0
+offset_right = 871.0
+offset_bottom = 452.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/BoneAxisPanel" unique_id=1842313093]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 248.0
+
+[node name="YRing" type="Control" parent="CanvasLayer/BoneAxisPanel/VBoxContainer" unique_id=1632673601]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+script = ExtResource("23_yqr1d")
+axis_name = "Y"
+ring_color = Color(0.34562296, 0.7952043, 0, 1)
+selection_manager_path = NodePath("../../../../SelectionManager")
+
+[node name="ZRing" type="Control" parent="CanvasLayer/BoneAxisPanel/VBoxContainer" unique_id=255172123]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+script = ExtResource("23_yqr1d")
+axis_name = "Z"
+ring_color = Color(0, 0.53054655, 0.8085245, 1)
+selection_manager_path = NodePath("../../../../SelectionManager")
+
+[node name="XRing" type="Control" parent="CanvasLayer/BoneAxisPanel/VBoxContainer" unique_id=69957059]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+script = ExtResource("23_yqr1d")
+selection_manager_path = NodePath("../../../../SelectionManager")
+
+[node name="WelcomeTip" type="Panel" parent="CanvasLayer" unique_id=1864766149]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -403.0
+offset_top = -82.0
+offset_right = 334.0
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/WelcomeTip" unique_id=1195353596]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WelcomeLabel" type="Label" parent="CanvasLayer/WelcomeTip/VBoxContainer" unique_id=1533992481]
+layout_mode = 2
+text = "Para salir al menú principal, presioná Ctrl + Q.\\nEl proyecto se guarda automáticamente al salir."
+
+[node name="WelcomeCloseButton" type="Button" parent="CanvasLayer/WelcomeTip/VBoxContainer" unique_id=2076358759]
+layout_mode = 2
+text = "Entendido"
+
+[node name="CameraPropertiesPanel" type="Panel" parent="CanvasLayer" unique_id=1532463260]
+visible = false
+offset_left = 275.0
+offset_top = 213.0
+offset_right = 472.0
+offset_bottom = 386.0
+script = ExtResource("24_ltvhs")
+
+[node name="UseCustomBgCheckbox" type="CheckBox" parent="CanvasLayer/CameraPropertiesPanel" unique_id=604634358]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 24.0
+offset_right = 193.0
+offset_bottom = 55.0
+text = "Fondo personalizado"
+
+[node name="BgColorPickerButton" type="ColorPickerButton" parent="CanvasLayer/CameraPropertiesPanel" unique_id=2069084086]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 61.0
+offset_right = 136.0
+offset_bottom = 120.0
+
+[node name="FovSpinBox" type="SpinBox" parent="CanvasLayer/CameraPropertiesPanel" unique_id=1026751724]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 131.0
+offset_right = 143.5
+offset_bottom = 162.0
+min_value = 10.0
+max_value = 170.0
+value = 10.0
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/CameraPropertiesPanel" unique_id=1203164844]
+layout_mode = 0
+offset_left = 139.0
+offset_top = -30.0
+offset_right = 197.0
+offset_bottom = 1.0
+text = "Cerrar"
+
+[node name="TextureLibraryPanel" type="Panel" parent="CanvasLayer" unique_id=323361286]
+visible = false
+offset_left = 668.0
+offset_top = 239.0
+offset_right = 847.0
+offset_bottom = 424.0
+script = ExtResource("25_v4ejg")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/TextureLibraryPanel" unique_id=585036233]
+layout_mode = 0
+offset_right = 178.0
+offset_bottom = 185.0
+
+[node name="ThumbsContainer" type="HBoxContainer" parent="CanvasLayer/TextureLibraryPanel/ScrollContainer" unique_id=1729887831]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/TextureLibraryPanel" unique_id=1554620626]
+layout_mode = 0
+offset_left = 121.0
+offset_top = -30.0
+offset_right = 179.0
+offset_bottom = 1.0
+text = "Cerrar"
+
+[node name="SelectionManager" type="Node3D" parent="." unique_id=1921408211]
+script = ExtResource("6_a8p2b")
+camera_rig_path = NodePath("../CameraRig")
+object_toolbar_path = NodePath("../CanvasLayer/ObjectToolbar")
+delete_menu_path = NodePath("../CanvasLayer/DeleteMenu")
+outliner_path = NodePath("../CanvasLayer/Outliner")
+history_manager_path = NodePath("../HistoryManager")
+light_panel_path = NodePath("../CanvasLayer/LightPropertiesPanel")
+view_camera_menu_path = NodePath("../CanvasLayer/ViewCameraMenu")
+render_manager_path = NodePath("../RenderManager")
+materials_panel_path = NodePath("../CanvasLayer/MaterialsPanel")
+music_panel_path = NodePath("../CanvasLayer/MusicPropertiesPanel")
+video_panel_path = NodePath("../CanvasLayer/VideoPropertiesPanel")
+camera_panel_path = NodePath("../CanvasLayer/CameraPropertiesPanel")
+camera_rig_ref_path = NodePath("../CameraRig")
+mode_bar_path = NodePath("../CanvasLayer/ModeBar")
+animation_manager_path = NodePath("../AnimationManager")
+bone_axis_panel_path = NodePath("../CanvasLayer/BoneAxisPanel")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1145353405]
+environment = SubResource("Environment_sctf7")
+
+[node name="HistoryManager" type="Node" parent="." unique_id=803119720]
+script = ExtResource("9_lyxkq")
+outliner_path = NodePath("../CanvasLayer/Outliner")
+animation_manager_path = NodePath("../AnimationManager")
+selection_manager_path = NodePath("../SelectionManager")
+
+[node name="AnimationManager" type="Node" parent="." unique_id=1708363427]
+script = ExtResource("14_a5wrc")
+selection_manager_path = NodePath("../SelectionManager")
+timeline_ruler_path = NodePath("../CanvasLayer/AnimationPanel/TimelineRuler")
+add_keyframe_button_path = NodePath("../CanvasLayer/AnimationPanel/TrackHeaderRow/AddKeyframeButton")
+playback_controls_path = NodePath("../CanvasLayer/AnimationPanel/PlaybackControls")
+spawn_root_path = NodePath("../SpawnRoot")
+end_frame_input_path = NodePath("../CanvasLayer/AnimationPanel/TrackHeaderRow/EndFrameInput")
+video_loop_controls_path = NodePath("../CanvasLayer/AnimationPanel/VideoLoopControls")
+history_manager_path = NodePath("../HistoryManager")
+
+[node name="RenderViewport" type="SubViewport" parent="." unique_id=287620913]
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="RenderManager" type="Node" parent="." unique_id=1958510318]
+script = ExtResource("20_rd5dn")
+render_viewport_path = NodePath("../RenderViewport")
+animation_manager_path = NodePath("../AnimationManager")
+floor_path = NodePath("../Floor")
+spawn_root_path = NodePath("../SpawnRoot")
+camera_rig_ref_path = NodePath("../CameraRig")
+selection_manager_path = NodePath("../SelectionManager")
+editor_camera_path = NodePath("../CameraRig/CameraPitch/Camera3D")
+main_script_path = NodePath("..")
+
+[node name="VideoPlayerManager" type="Node" parent="." unique_id=357229486]
+script = ExtResource("25_8qufa")
+spawn_root_path = NodePath("../SpawnRoot")
+animation_manager_path = NodePath("../AnimationManager")
