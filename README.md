@@ -52,14 +52,14 @@ Version 1.0, made by one person, so bugs are possible. Issues and suggestions ar
 
 ## License
 
-The source code of Bult 3D is available under CC BY-NC 4.0 (see LICENSE):
-you can use and modify it, but you must give credit to LostieBulter, link to this
-repository, indicate changes, and you can't use the code commercially.
-
-Animations, videos and models you create with Bult 3D are yours and can be used
-commercially. The license only covers the program's source code.
+Bult 3D is released under the MIT License (see LICENSE). You can use, modify,
+distribute and even sell it, as long as you keep the copyright notice.
 
 Bult 3D uses Godot Engine (MIT license) and FFmpeg (not included), which have their own licenses.
+
+## Maintenance
+
+This project is no longer actively maintained. Forks and pull requests are welcome.
 
 ## Credits
 
